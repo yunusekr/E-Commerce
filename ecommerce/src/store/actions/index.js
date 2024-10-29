@@ -1,4 +1,7 @@
 export const SAVE_CATEGORY = "SAVE_CATEGORY";
+export const SAVE_PRODUCT = "SAVE_PRODUCT";
+export const SAVE_PRODUCTWITHOUTSIZEANDCOLOR =
+  "SAVE_PRODUCTWITHOUTSIZEANDCOLOR";
 
 import axios from "axios";
 
@@ -51,3 +54,37 @@ export const saveCategory = (data) => (dispatch) => {
       dispatch({ type: SAVE_CATEGORY });
     });
 };
+
+export const saveProduct =
+  (data, categoryid, subcategoryid, sizeid, colorid) => (dispatch) => {
+    axios
+      .post(
+        "http://localhost:9000/ecom/admin/addproducts/" +
+          categoryid +
+          "/" +
+          subcategoryid +
+          "/" +
+          sizeid +
+          "/" +
+          colorid,
+        data
+      )
+      .then((res) => {
+        dispatch({ type: SAVE_PRODUCT });
+      });
+  };
+
+export const saveProductwithoutsizeandcolor =
+  (data, categoryid, subcategoryid) => (dispatch) => {
+    axios
+      .post(
+        "http://localhost:9000/ecom/admin/addproducts/" +
+          categoryid +
+          "/" +
+          subcategoryid,
+        data
+      )
+      .then((res) => {
+        dispatch({ type: SAVE_PRODUCTWITHOUTSIZEANDCOLOR });
+      });
+  };
