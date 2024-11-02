@@ -2,6 +2,8 @@ export const SAVE_CATEGORY = "SAVE_CATEGORY";
 export const SAVE_PRODUCT = "SAVE_PRODUCT";
 export const SAVE_PRODUCTWITHOUTSIZEANDCOLOR =
   "SAVE_PRODUCTWITHOUTSIZEANDCOLOR";
+export const SAVE_USER = "SAVE_USER";
+export const GET_USER = "GET_USER";
 
 import axios from "axios";
 
@@ -88,3 +90,17 @@ export const saveProductwithoutsizeandcolor =
         dispatch({ type: SAVE_PRODUCTWITHOUTSIZEANDCOLOR });
       });
   };
+
+export const saveUser = (data) => (dispatch) => {
+  axios.post("http://localhost:9000/ecom/auth/register", data).then((res) => {
+    dispatch({ type: SAVE_USER });
+  });
+};
+
+export const getUser = (email, password) => (dispatch) => {
+  axios
+    .get("http://localhost:9000/ecom/auth/login/" + email + "/" + password)
+    .then((res) => {
+      dispatch({ type: GET_USER, payload: res.data });
+    });
+};
