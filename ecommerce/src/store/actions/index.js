@@ -4,6 +4,7 @@ export const SAVE_PRODUCTWITHOUTSIZEANDCOLOR =
   "SAVE_PRODUCTWITHOUTSIZEANDCOLOR";
 export const SAVE_USER = "SAVE_USER";
 export const GET_USER = "GET_USER";
+export const GET_PRODUCTS = "GET_PRODUCTS";
 
 import axios from "axios";
 
@@ -61,7 +62,7 @@ export const saveProduct =
   (data, categoryid, subcategoryid, sizeid, colorid) => (dispatch) => {
     axios
       .post(
-        "http://localhost:9000/ecom/admin/addproducts/" +
+        "http://localhost:9000/ecom/products/admin/addproducts/" +
           categoryid +
           "/" +
           subcategoryid +
@@ -80,7 +81,7 @@ export const saveProductwithoutsizeandcolor =
   (data, categoryid, subcategoryid) => (dispatch) => {
     axios
       .post(
-        "http://localhost:9000/ecom/admin/addproducts/" +
+        "http://localhost:9000/ecom/products/admin/addproducts/" +
           categoryid +
           "/" +
           subcategoryid,
@@ -103,4 +104,15 @@ export const getUser = (email, password) => (dispatch) => {
     .then((res) => {
       dispatch({ type: GET_USER, payload: res.data });
     });
+};
+
+export const getProducts = (page, size) => async (dispatch) => {
+  try {
+    const response = await axios.get("http://localhost:9000/ecom/products", {
+      params: { page, size },
+    });
+    dispatch({ type: GET_PRODUCTS, payload: response.data });
+  } catch (error) {
+    console.error("Error fetching products:", error);
+  }
 };
