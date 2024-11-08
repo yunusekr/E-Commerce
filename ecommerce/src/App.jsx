@@ -7,11 +7,14 @@ import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import AddProducts from "./components/AdminPages/AddProducts";
 import Register from "./components/ResigterAndLoginPages/Register";
 import Login from "./components/ResigterAndLoginPages/Login";
+import Products from "./components/ProductsPages/Products";
+import ProductCard from "./components/ProductsPages/ProductCard";
+
 function App() {
   return (
     <Switch>
       <Route exact path="/">
-        <Login />
+        <Products />
       </Route>
       <Route path="/adpro">
         <AddProducts />

@@ -88,12 +88,6 @@ function AddProducts() {
       ],
     };
 
-    console.log("Kategori ID:", category.id);
-    console.log("Alt Kategori ID:", subcategory.id);
-    console.log("Seçilen Beden ID:", selectedSize);
-    console.log("Seçilen Renk ID:", selectedColor);
-    console.log("Payload:", payload);
-
     if (selectedSize == null && selectedColor == null) {
       dispatch(
         saveProductwithoutsizeandcolor(payload, category.id, subcategory.id)
@@ -123,10 +117,12 @@ function AddProducts() {
       <input type="text" {...register("description")} placeholder="Açıklama" />
 
       <p>Detaylı Açıklama:</p>
-      <input
-        type="text"
+      <textarea
         {...register("long_description")}
         placeholder="Detaylı Açıklama"
+        rows="5"
+        cols="50"
+        style={{ resize: "vertical" }}
       />
 
       <label htmlFor="category">Kategori Seç:</label>
@@ -151,7 +147,7 @@ function AddProducts() {
 
       <div>
         <h2>Ürün Bedenleri</h2>
-        <div className="flex gap-2">
+        <div className="flex gap-2 justify-center">
           {sizes.map((size) => (
             <div key={size.id}>
               <input
@@ -168,7 +164,7 @@ function AddProducts() {
 
       <div>
         <h2>Ürün Renkleri</h2>
-        <div className="flex gap-2">
+        <div className="flex gap-2 justify-center">
           {colors.map((color) => (
             <div key={color.id}>
               <input
